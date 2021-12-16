@@ -3,8 +3,26 @@
 
 template<typename T>
 struct Node {
+
+public:
     T value;
     Node *next;
+
+    T getValue(){
+        return value;
+    }
+
+    Node * getNext(){
+        return next;
+    }
+
+    void setValue(T value){
+        this->value = value;
+    }
+
+    void setNext( Node *next){
+        this->value = value;
+    }
 };
 
 template<typename T>
@@ -23,14 +41,14 @@ public:
         Node<T> *prev = node, *ptr = node;
 
         while (ptr != nullptr) {
-            if (value < ptr->value)
+            if (value < ptr->getValue())
                 break;
             else {
-                if (value == ptr->value)
+                if (value == ptr->getValue())
                     break;
             }
             prev = ptr;
-            ptr = ptr->next;
+            ptr = ptr->getNext();
         }
 
         auto *p = new Node<T>();
@@ -75,7 +93,7 @@ public:
 
     Node<T> *begin() { return node; }
 
-    bool isEmpty() const { return (node == NULL); }
+    bool isEmpty() const { return (node == nullptr); }
 
 
     SortedList<T> filter(bool (*ptr)(T)) {
