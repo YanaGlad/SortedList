@@ -3,7 +3,7 @@
 
 /*
  * @author y. glad
- * Задание 1.1 Связный список с сохранением упорядоченности при добавлении
+ * Задание 1.1-1.2 Связный список с сохранением упорядоченности при добавлении
  */
 template<typename T>
 struct Node { // Узел
@@ -100,7 +100,7 @@ public:
 
     Node<T> *begin() { return node; }
 
-    // Отфильтровать список по некоторой лямбда-функции
+    // Функция фильтрации. Принимает функцию, которая задает принцип сортирвки
     SortedList<T> filter(bool (*ptr)(T)) {
         SortedList newList = SortedList();
         Node<T> *tmp = node;
@@ -132,8 +132,8 @@ bool checkDegreeThree(int value) {
 //Программист задание 1.2
 class Programmer {
 
-private:
-    const std::string NOT_STATED = "not stated";
+public:
+    std::string NOT_STATED = "not stated";
     std::string name,
             surname,
             email = NOT_STATED,
@@ -142,24 +142,67 @@ private:
             currentWorkPlace = NOT_STATED,
             mainDevLang;
     int level;
-public:
-    Programmer(std::string name, std::string surname, std::string mainDevLang){
+
+    Programmer(std::string name, std::string surname, std::string mainDevLang, int level) {
         this->name = name;
         this->surname = surname;
         this->mainDevLang = mainDevLang;
+        this->level = level;
+    }
+    Programmer(){
+
     }
 
     Programmer(std::string name, std::string surname, std::string mainDevLang,
                std::string email, std::string skype, std::string telegram,
-               std::string currentWorkPlace, int level){
+               std::string currentWorkPlace, int level) {
         this->name = name;
         this->surname = surname;
         this->mainDevLang = mainDevLang;
         this->email = email;
         this->skype = skype;
         this->telegram = telegram;
+        this->currentWorkPlace = currentWorkPlace;
+        this->level = level;
     }
+
 };
+
+bool operator==(const Programmer &p1, const Programmer &p2) {
+    return p1.name == p2.name && p1.surname == p2.surname && p1.mainDevLang == p2.mainDevLang &&
+           p1.telegram == p2.telegram;
+}
+
+bool operator!=(const Programmer &p1, const Programmer &p2) {
+    return p1.name != p2.name || p1.surname != p2.surname || p1.mainDevLang != p2.mainDevLang ||
+           p1.telegram != p2.telegram;
+}
+
+bool operator>(const Programmer &p1, const Programmer &p2) {
+    if (p1.level > p2.level) return true;
+    else if (p1.level == p2.level) {
+        if (p1.mainDevLang > p2.mainDevLang)
+            return true;
+        else if (p1.mainDevLang == p2.mainDevLang) {
+            if (p1.name > p2.name)
+                return true;
+            else return false;
+        } else return false;
+    } else return false;
+}
+
+bool operator<(const Programmer &p1, const Programmer &p2) {
+    if (p1.level < p2.level) return true;
+    else if (p1.level == p2.level) {
+        if (p1.mainDevLang < p2.mainDevLang)
+            return true;
+        else if (p1.mainDevLang == p2.mainDevLang) {
+            if (p1.name < p2.name)
+                return true;
+            else return false;
+        } else return false;
+    } else return false;
+}
 
 int main() { // пример рабаоты
     SortedList<int> list{};
@@ -179,5 +222,17 @@ int main() { // пример рабаоты
         std::cout << val->value << " ";
     }
     list.clear();
+
+    std::cout << std::endl;
+    SortedList<Programmer> list2{};
+    list2.push_back(Programmer("Yana", "Glad", "Koltin", 10)); // Задание 1.2
+    list2.push_back(Programmer("Andrey", "Andrey", "C++", 5));
+    list2.push_back(Programmer("Egor", "Egor", "Kotlin", 1));
+    list2.push_back(Programmer("Ivan", "Ivanov", "Java", 7));
+    list2.push_back(Programmer("Igor", "Igor", "Swift", 8));
+
+    for (Node<Programmer> *val = list2.begin(); val != nullptr; val = val->next) {
+        std::cout << val->value.name << " ";
+    }
     return 0;
 }
