@@ -12,19 +12,19 @@ public:
     T value; // Значение
     Node *next; // Указатель на следующий
 
-    T getValue(){
+    T getValue() {
         return value;
     }
 
-    Node * getNext(){
+    Node *getNext() {
         return next;
     }
 
-    void setValue(T value){
+    void setValue(T value) {
         this->value = value;
     }
 
-    void setNext( Node *next){
+    void setNext(Node *next) {
         this->value = value;
     }
 };
@@ -129,6 +129,38 @@ bool checkDegreeThree(int value) {
     return check;
 }
 
+//Программист задание 1.2
+class Programmer {
+
+private:
+    const std::string NOT_STATED = "not stated";
+    std::string name,
+            surname,
+            email = NOT_STATED,
+            skype = NOT_STATED,
+            telegram = NOT_STATED,
+            currentWorkPlace = NOT_STATED,
+            mainDevLang;
+    int level;
+public:
+    Programmer(std::string name, std::string surname, std::string mainDevLang){
+        this->name = name;
+        this->surname = surname;
+        this->mainDevLang = mainDevLang;
+    }
+
+    Programmer(std::string name, std::string surname, std::string mainDevLang,
+               std::string email, std::string skype, std::string telegram,
+               std::string currentWorkPlace, int level){
+        this->name = name;
+        this->surname = surname;
+        this->mainDevLang = mainDevLang;
+        this->email = email;
+        this->skype = skype;
+        this->telegram = telegram;
+    }
+};
+
 int main() { // пример рабаоты
     SortedList<int> list{};
     list.push_back(225);
@@ -141,7 +173,7 @@ int main() { // пример рабаоты
 
     std::cout << "Deleted value " << deleted << std::endl;
 
-    SortedList<int> newList = list.filter([](int j) { return checkDegreeThree(j); });
+    SortedList<int> newList = list.filter([](int j) { return checkDegreeThree(j); }); // Задание 1.1 25 вариант
 
     for (Node<int> *val = newList.begin(); val != nullptr; val = val->next) {
         std::cout << val->value << " ";
