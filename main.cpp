@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include "Programmer.h"
 
 /*
  * @author y. glad
@@ -128,45 +129,6 @@ bool checkDegreeThree(int value) {
 
     return check;
 }
-
-//Программист задание 1.2
-class Programmer {
-
-public:
-    std::string NOT_STATED = "not stated";
-    std::string name,
-            surname,
-            email = NOT_STATED,
-            skype = NOT_STATED,
-            telegram = NOT_STATED,
-            currentWorkPlace = NOT_STATED,
-            mainDevLang;
-    int level;
-
-    Programmer(std::string name, std::string surname, std::string mainDevLang, int level) {
-        this->name = name;
-        this->surname = surname;
-        this->mainDevLang = mainDevLang;
-        this->level = level;
-    }
-    Programmer(){
-
-    }
-
-    Programmer(std::string name, std::string surname, std::string mainDevLang,
-               std::string email, std::string skype, std::string telegram,
-               std::string currentWorkPlace, int level) {
-        this->name = name;
-        this->surname = surname;
-        this->mainDevLang = mainDevLang;
-        this->email = email;
-        this->skype = skype;
-        this->telegram = telegram;
-        this->currentWorkPlace = currentWorkPlace;
-        this->level = level;
-    }
-
-};
 
 bool operator==(const Programmer &p1, const Programmer &p2) {
     return p1.name == p2.name && p1.surname == p2.surname && p1.mainDevLang == p2.mainDevLang &&

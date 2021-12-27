@@ -3,4 +3,4 @@ project(MireaLab1)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(MireaLab1 main.cpp)
+add_executable(MireaLab1 main.cpp Programmer.h)
